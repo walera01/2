@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path('drugi/',Drug.as_view(), name='drug'),
+    path('drugi/',drug, name='drug'),
     path('drugi/<int:drug>/', drug1, name="drugs"),
     path('drugi/<str:sort>/',Drug.as_view(), name='drugsort'),
     path('category/<slug:category_slug>/',SorttCategory.as_view(), name='category'),

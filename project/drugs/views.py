@@ -13,10 +13,27 @@ class AddDrug(CreateView):
     form_class = RegisterDrugs
     template_name = 'drugs/adddrug.html'
 
-class Drug(ListView):
+class Drug(ListView, CreateView):
     model = Drugs
     template_name = 'drugs/drug_catalog.html'
     context_object_name = 'model'
+
+def drug(request):
+    if request.method=="GET":
+        model=Drugs.objects.filter(prise >0)
+        context = {
+            'model': model,
+        }
+    elif request.method=="POST":
+        min_prise=float(request.POST.get('id1'))
+        model=Drugs.objects.filter(prise=min_prise)
+        context = {
+            'model': model,
+            'min_prise': min_prise,
+        }
+
+    return render(request,'drugs/drug_catalog.html', context=context )
+
 
 def edit(request, drug):
     model = Drugs.objects.get(id=drug)

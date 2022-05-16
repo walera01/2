@@ -49,11 +49,12 @@
 
 
      <form method="post" class="fromprise" name="idform">
+         {% csrf_token %}
         <p>
             <b>Цена</b>
-            <input  type="number" placeholder="от" min="0" max="9000" name="id1">
+            <input  type="number" placeholder="от" min="0" max="9000" {% if min_prise %} value="{{ min_prise }}"{%else%}value ="0"{%endif%} name="id1">
             <input type="number" placeholder="до" min="0" max="9000" name="id2">
-            <input type = "button" value="find" onclick="Myfunction()">
+            <input type = "submit" value="find">
         </p>
      </form>
 
